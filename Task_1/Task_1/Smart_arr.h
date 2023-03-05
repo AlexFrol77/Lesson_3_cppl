@@ -5,6 +5,8 @@ template <class T>
 class SmartArr {
 public:
 	SmartArr(int size);
+	SmartArr();
+	SmartArr(const SmartArr<T>&) = delete;
 	~SmartArr();
 
 	void AddArr(T num);
@@ -17,7 +19,11 @@ public:
 
 	T GetElement(int num);
 
+	SmartArr<T>& operator=(const SmartArr<T>&) = delete;
+
 	T operator[](int num);
+
+	bool CheckIndex(int num);
 
 private:
 	int size_;

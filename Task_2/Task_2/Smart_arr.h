@@ -4,7 +4,9 @@
 template <class T>
 class SmartArr {
 public:
+	SmartArr();
 	SmartArr(int size);
+	SmartArr(const SmartArr<T> &other);
 	~SmartArr();
 
 	void AddArr(T num);
@@ -15,6 +17,8 @@ public:
 
 	int GetCapacity();
 
+	bool CheckIndex(int num);
+
 	bool GetEmpty();
 
 	void PrintArr();
@@ -23,11 +27,11 @@ public:
 
 	T operator[](int num);
 
-	SmartArr<T> &operator=(SmartArr<T> &r_op);
+	SmartArr<T> &operator=(const SmartArr<T> &r_op);
 
 private:
-	int size_;
-	T* ptr;
+	int size_ = 0;
+	T* ptr = nullptr;
 	int count = 0;
 
 };

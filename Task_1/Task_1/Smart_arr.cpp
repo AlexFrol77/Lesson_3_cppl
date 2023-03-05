@@ -2,14 +2,20 @@
 #include <iostream>
 
 template <class T>
-SmartArr<T>::SmartArr(int size) {
+SmartArr <T>::SmartArr(int size) {
 	this->size_ = size;
 	this->ptr = new T[size_];
 }
+
 template <class T>
-SmartArr<T>::~SmartArr() {
-	delete[] ptr;
-	/*std::cout << "Удаление массива" << std::endl;*/
+SmartArr <T>::SmartArr() {
+	this->size_ = 0;
+	this->count = 0;
+	this->ptr = new T[0];
+}
+template <class T>
+SmartArr <T>::~SmartArr() {
+	delete[] ptr;	
 }
 template <class T>
 void SmartArr<T>::AddArr(T num) {
@@ -17,25 +23,12 @@ void SmartArr<T>::AddArr(T num) {
 		ptr[count] = num;
 		count++;
 	}
-	//else {									// Хотел сделать расширяющий массив)))
-	//	size_ *= 2;
-	//	int* ptr_new = new int[size_];
-	//	for (int i = 0; i < size_; i++) {
-	//		ptr_new[i] = ptr[i];
-	//	}
-	//	delete[] ptr;
-	//	ptr = nullptr;
-	//	ptr_new[count] = num;
-	//	count++;
-	//	ptr = ptr_new;
-	//	ptr_new = nullptr;
-	//}
 	else {
 		throw std::runtime_error("Переполнение массива");
 	}
 }
 template <class T>
-int SmartArr<T>::GetSize() {
+int SmartArr <T>::GetSize() {
 	return count;
 }
 template <class T>
@@ -47,10 +40,32 @@ bool SmartArr<T>::GetEmpty() {
 	return count;
 }
 template <class T>
+bool SmartArr<T>::CheckIndex(int num) {
+	if (GetSize() == 0) {
+		throw std::runtime_error("Массив пустой");
+	}
+	else if (num >= 0 && num < GetSize()) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+template <class T>
 T SmartArr<T>::GetElement(int num) {
-	return ptr[num];
+	if (CheckIndex(num)) {
+		return ptr[num];
+	}
+	else {
+		throw std::runtime_error("Неверный индекс");
+	}
 }
 template <class T>
 T SmartArr<T>::operator[](int num) {
-	return ptr[num];
+	if (CheckIndex(num)) {
+		return ptr[num];
+	}
+	else {
+		throw std::runtime_error("Неверный индекс");
+	}
 }

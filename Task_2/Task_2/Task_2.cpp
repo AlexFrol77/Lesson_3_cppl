@@ -22,7 +22,12 @@ int main(int argc, char** argv) {
 
 	Arr.PrintArr();
 	NewArr.PrintArr();
-	
+
+	SmartArr<int> ArrTest;
+	ArrTest = Arr;
+
+	ArrTest.PrintArr();
+
 	return 0;
 }
 
